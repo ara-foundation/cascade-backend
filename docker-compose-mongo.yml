@@ -1,0 +1,14 @@
+services:
+  mongodb:
+    image: mongo:latest
+    container_name: mongodb
+    restart: always
+    ports:
+      - "27017:27017"
+    environment:
+      MONGO_INITDB_ROOT_USERNAME: admin          # root admin user
+      MONGO_INITDB_ROOT_PASSWORD: adminpassword  # root admin password
+      MONGO_INITDB_DATABASE: users           # database to create initially
+    volumes:
+      - ./docker/data:/data/db
+      - ./docker/scripts/mongo-init.js:/docker-entrypoint-initdb.d/mongo-init.js:ro  # init script
